@@ -19,9 +19,24 @@ exports.create = function(body,cb) {
 	});
 }
 
-exports.retrieveAll = cb => {
-	readMessages(cb);
+exports.retrieveAll = (sortCriteria, cb) => {
+	if (!sortCriteria){
+		readMessages(cb);
+	}
+	else {
+		readMessages( function(err,messages){
+			if(err) return cb(err);  
+			messages = messages.sort( (a,b) => {
+				return ( toLowerCase(a) - toLowerCase(b) );
+			});
+		});
+		cb(null,messages);
+	}
 }
+
+
+
+
 
 exports.retrieveOne = function(id,cb) {
 	readMessages( function(err,messages){

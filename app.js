@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const PORT = process.env.PORT || 8000;
 
 const messages = require('./messages.js');
 
@@ -57,7 +58,7 @@ app.delete('/message/:id', function(req,res){
 });
 
 
-app.listen(8000, function(err) {
+app.listen(PORT, function(err) {
 	console.log(err||"Server online");
 });
 

@@ -27,7 +27,8 @@ exports.retrieveAll = (sortCriteria, cb) => {
 		readMessages( function(err,messages){
 			if(err) return cb(err);  
 			messages = messages.sort( (a,b) => {
-				return ( a[sortCriteria].toLowerCase() - b[sortCriteria].toLowerCase() );
+			console.log(a[sortCriteria][0].toLowerCase());
+				return  ( ("" + a[sortCriteria][0].toLowerCase()).charCodeAt() - ("" + b[sortCriteria][0].toLowerCase()).charCodeAt()  );
 			});
 			cb(null,messages);
 		});

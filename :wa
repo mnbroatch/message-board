@@ -24,12 +24,12 @@ exports.retrieveAll = (sortCriteria, cb) => {
 		readMessages(cb);
 	}
 	else {
+			console.log('before readmessages');
 		readMessages( function(err,messages){
 			if(err) return cb(err);  
 			messages = messages.sort( (a,b) => {
-				return ( a[sortCriteria].toLowerCase() - b[sortCriteria].toLowerCase() );
+				return ( a.toLowerCase() - b.toLowerCase() );
 			});
-			cb(null,messages);
 		});
 	}
 }

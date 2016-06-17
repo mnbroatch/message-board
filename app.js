@@ -24,6 +24,7 @@ app.post('/message', function(req,res){
 
 // gimme an R!
 app.get('/message', function(req,res){
+
 	messages.retrieveAll(req.query.sort, function(err,messages){
 		if(err) return res.status(400).send(err); 
 		res.send(messages);

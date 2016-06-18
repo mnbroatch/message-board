@@ -1,0 +1,42 @@
+doctype html
+html(lang="en")
+	head
+		script(src='https://code.jquery.com/jquery-3.0.0.min.js')
+		script(src='main.js')
+		link(href='/css/style.css', rel='stylesheet')
+		meta(charset="UTF-8")
+		title
+	body
+		h1 N0deChan	
+		#control-area
+			#input-area
+				form#new-message-form
+					input(class="author-field" type="text" name="author" placeholder="Author" required)
+					input(class="message-field" type="text" name="text" placeholder="Message" required)
+					input(class="spoiler-field" type="checkbox" name="spoiler")
+					button Submit!
+		#message-area
+			for message in messages
+				.message(data-id=message.id)
+					h4.author Author: #{message.author}
+					if (message.isSpoiler)
+						p.message
+							a(href='#' data-text=message.text class="spoiler") Spoiler
+					else
+						p.message #{message.text}
+					button.delete-button Delete
+					button.edit-button Edit
+				
+			.message.template
+				h4.author Author: sample author
+				p.message sample text
+				button.delete-button Delete
+				button.edit-button Edit
+				.edit-box
+					input(class="author-field" type="text" name="author" placeholder="Author" required)
+					input(class="message-field" type="text" name="text" placeholder="Message" required)
+					input(class="spoiler-field" type="checkbox" name="spoiler")
+
+
+
+

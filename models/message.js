@@ -1,12 +1,14 @@
 "use strict;"
 
 
+const express = require('express');
 const uuid = require('uuid');
 const fs = require('fs');
 const path = require('path');
 
-const dataPath = path.join(__dirname, "messages.json");
+const dataPath = path.join(__dirname, '../data', "messages.json");
 
+let app = express();
 
 
 exports.create = function(body,cb) {
@@ -15,7 +17,9 @@ exports.create = function(body,cb) {
 		body.id = uuid();
 		body.timestamp = Date.now();
 		messages.push(body);
-		writeMessages(messages,cb)
+		writeMessages(messages,function(){
+			cb(err,body);
+		})
 	});
 }
 
@@ -27,7 +31,6 @@ exports.retrieveAll = (sortCriteria, cb) => {
 		readMessages( function(err,messages){
 			if(err) return cb(err);  
 			messages = messages.sort( (a,b) => {
-			console.log(a[sortCriteria][0].toLowerCase());
 				return  ( ("" + a[sortCriteria][0].toLowerCase()).charCodeAt() - ("" + b[sortCriteria][0].toLowerCase()).charCodeAt()  );
 			});
 			cb(null,messages);
